@@ -5,8 +5,8 @@
 
 st.title('Portfolio Optimisation')
 
-pip install yfinance
-pip install fredapi
+!pip install yfinance
+!pip install fredapi
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
