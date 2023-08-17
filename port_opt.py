@@ -3,6 +3,8 @@
 # Portfolio Optimisation
 """
 
+st.title('Portfolio Optimisation')
+
 #pip install yfinance
 
 import yfinance as yf
