@@ -118,7 +118,7 @@ print(f"Sharpe Ratio: {optimal_sharpe_ratio:.4f}")
 
 
 
-plt.figure(figsize=(, 6))
+plt.figure(figsize=(10, 6))
 plt.bar(tickers2, optimal_weights)
 
 plt.xlabel('Assets')
