@@ -5,11 +5,15 @@
 
 st.title('Portfolio Optimisation')
 
-#pip install yfinance
-
+#!pip install yfinance
+#!pip install fredapi
 import yfinance as yf
 import pandas as pd
+import matplotlib.pyplot as plt
+import scipy
 
+from scipy.optimize import minimize
+from fredapi import Fred
 
 
 #Define tickers
@@ -22,8 +26,14 @@ tickers = ['SPY', # S&P500 Index
 
 tickers2 = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
-#Create list of close prices
+import streamlit as st
 
+options = st.multiselect(
+    'Select Ticker Symbols',
+     tickers)
+st.write('You selected:', options)
+
+#Create list of close prices
 adj_close_df = pd.DataFrame()
 
 #Download close prices
@@ -64,23 +74,22 @@ def expected_return(weights, log_returns):
 def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return (expected_return(weights, log_returns) - risk_free_rate) / standard_deviation(weights, cov_matrix)
 
-#! pip install fredapi
-from fredapi import Fred
+
 
 #risk_free_rate = .02 #default risk free rate
 
- fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
- ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
+fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
+ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
 
- risk_free_rate = ten_year_treasury_rate.iloc[-1]
- print (risk_free_rate)
+risk_free_rate = ten_year_treasury_rate.iloc[-1]
+print (risk_free_rate)
 
 #Set Initial weights
 
 #initial_weights = np.array([1/len(tickers)]*len(tickers))
 initial_weights = np.array([1/len(tickers2)]*len(tickers2))
 
-from scipy.optimize import minimize
+
 
 def neg_sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return -sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate)
@@ -107,7 +116,7 @@ print(f"Expected Annual Return: {optimal_portfolio_return:.4f}")
 print(f"Expected Volatility: {optimal_portfolio_volatility:.4f}")
 print(f"Sharpe Ratio: {optimal_sharpe_ratio:.4f}")
 
-import matplotlib.pyplot as plt
+
 
 plt.figure(figsize=(, 6))
 plt.bar(tickers2, optimal_weights)
