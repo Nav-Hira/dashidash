@@ -8,6 +8,8 @@ st.title('Portfolio Optimisation')
 
 pip install yfinance
 pip install fredapi
+
+import streamlit as st
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -27,7 +29,6 @@ tickers = ['SPY', # S&P500 Index
 
 tickers2 = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
-import streamlit as st
 
 options = st.multiselect(
     'Select Ticker Symbols',
