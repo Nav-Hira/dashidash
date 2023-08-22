@@ -29,7 +29,8 @@ tickers = ['SPY', # S&P500 Index
            'BND', # Bond Index - Vanguard Total Bond Market Index Fund ETF
            'GLD', # SPDR Gold Trust - Largest commodity
            'QQQ', # Invesco largest stock on NASDAQ
-           'VTI'] # Vanguard Total Stock Market Index Fund ETF - Largest World Stock Market
+           'VTI', # Vanguard Total Stock Market Index Fund ETF - Largest World Stock Market
+           'BLK', 'UBS', 'FNF', 'STT'] #Asset Management/PE/Funds
 
 #tickers = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
