@@ -36,8 +36,8 @@ tickers = ['SPY', # S&P500 Index
 
 
 ticker_options = st.multiselect(
-    'Select Ticker Symbols', placeholder="Choose an option",
-     tickers)
+    'Select Ticker Symbols',
+     tickers, placeholder="Choose an option")
 
 
 #Create list of close prices
