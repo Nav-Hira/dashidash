@@ -34,7 +34,7 @@ tickers2 = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
 options = st.multiselect(
     'Select Ticker Symbols',
-     tickers)
+     tickers, tickers2)
 st.write('You selected:', options)
 
 #Create list of close prices
