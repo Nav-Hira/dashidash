@@ -55,6 +55,10 @@ for ticker in ticker_options:
 
 adj_close_df.head(5)
 
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(data)
+
 #lognormal returns
 
 import numpy as np
