@@ -2,7 +2,7 @@
 
 # Portfolio Optimisation
 
-pip install -r requirements.txt
+#pip install -r requirements.txt
 
 st.title('Portfolio Optimisation')
 
