@@ -21,7 +21,7 @@ import numpy as np
 from scipy.optimize import minimize
 
 st.title('Portfolio Optimisation')
-st.write('By Nav S. Hira, Aug 2023)
+st.write('By Nav S. Hira, Aug 2023')
 
 #Define tickers
 
