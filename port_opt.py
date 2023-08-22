@@ -29,12 +29,12 @@ tickers = ['SPY', # S&P500 Index
            'QQQ', # Invesco largest stock on NASDAQ
            'VTI'] # Vanguard Total Stock Market Index Fund ETF - Largest World Stock Market
 
-tickers2 = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
+#tickers = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
 
 options = st.multiselect(
     'Select Ticker Symbols',
-     tickers, tickers2)
+     tickers)
 st.write('You selected:', options)
 
 #Create list of close prices
@@ -46,7 +46,7 @@ start_date = '2008-01-01'
 end_date = '2023-12-31'
 
 adj_close_df = pd.DataFrame()
-for ticker in tickers2:
+for ticker in tickers:
     data = yf.download(ticker, start = start_date,end = end_date)
     adj_close_df[ticker] = data['Adj Close']
 
@@ -93,7 +93,7 @@ print (risk_free_rate)
 #Set Initial weights
 
 #initial_weights = np.array([1/len(tickers)]*len(tickers))
-initial_weights = np.array([1/len(tickers2)]*len(tickers2))
+initial_weights = np.array([1/len(tickers)]*len(tickers))
 
 
 
@@ -101,8 +101,8 @@ def neg_sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return -sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate)
 
 constraints = {'type': 'eq', 'fun': lambda weights: np.sum(weights) - 1}
-bounds = [(0, 0.4) for _ in range(len(tickers2))]
-initial_weights = np.array([1/len(tickers2)]*len(tickers2))
+bounds = [(0, 0.4) for _ in range(len(tickers))]
+initial_weights = np.array([1/len(tickers)]*len(tickers))
 
 optimized_results = minimize(neg_sharpe_ratio, initial_weights, args=(log_returns, cov_matrix, risk_free_rate), method='SLSQP', constraints=constraints, bounds=bounds)
 
@@ -111,7 +111,7 @@ optimal_weights = optimized_results.x
 optimal_weights = optimized_results.x
 
 print("Optimal Weights:")
-for ticker, weight in zip(tickers2, optimal_weights):
+for ticker, weight in zip(tickers, optimal_weights):
     print(f"{ticker}: {weight:.4f}")
 
 optimal_portfolio_return = expected_return(optimal_weights, log_returns)
@@ -125,7 +125,7 @@ print(f"Sharpe Ratio: {optimal_sharpe_ratio:.4f}")
 
 
 plt.figure(figsize=(10, 6))
-plt.bar(tickers2, optimal_weights)
+plt.bar(tickers, optimal_weights)
 
 plt.xlabel('Assets')
 plt.ylabel('Optimal Weights')
