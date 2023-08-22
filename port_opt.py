@@ -53,7 +53,7 @@ for ticker in ticker_options:
     data = yf.download(ticker, start = start_date,end = end_date)
     adj_close_df[ticker] = data['Adj Close']
 
-adj_close_df.head(5)
+print (adj_close_df.head(5))
 
 
 import plotly.express as px
