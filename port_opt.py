@@ -67,7 +67,10 @@ log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna() #drop nans a
 cov_matrix = log_returns.cov()*252 #(52*5 days)
 print(cov_matrix)
 
-st.title('Portfolio Standard deviation')
+
+
+
+
 def standard_deviation(weights, cov_matrix):
     variance = weights.T @ cov_matrix @ weights
     return np.sqrt(variance)
@@ -82,7 +85,7 @@ def expected_return(weights, log_returns):
 def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return (expected_return(weights, log_returns) - risk_free_rate) / standard_deviation(weights, cov_matrix)
 
-
+st.title('Provide risk-free rate for Portfolio Optimisation')
 
 #risk_free_rate = .02 #default risk free rate
 
@@ -99,6 +102,7 @@ else:
 
 
 print (risk_free_rate)
+
 
 
 #Set Initial weights
