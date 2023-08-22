@@ -85,23 +85,18 @@ def expected_return(weights, log_returns):
 def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return (expected_return(weights, log_returns) - risk_free_rate) / standard_deviation(weights, cov_matrix)
 
-st.title('Provide risk-free rate for Portfolio Optimisation')
+st.title('Portfolio Optimisation')
 
 #risk_free_rate = .02 #default risk free rate
-
-if st.checkbox('Apply 10 yr Treasury Rate for Risk-Free Rate '):
+st.write('For risk-free rate, either select 10yr Treasure Rate or enter risk-free rate manually (default is 2%)')
+if st.checkbox('10 yr Treasury Rate % '):
     fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
     ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
     risk_free_rate = ten_year_treasury_rate.iloc[-1]
-
-    st.write('Risk-Free Rate = ', risk_free_rate)
+    st.write('Risk-Free Rate = ', risk_free_rate*100, '%')
 else: 
-    risk_free_rate = st.number_input('Enter Risk-Free Rate value')
-    st.write('Risk-Free Rate = ', risk_free_rate)
-
-
-
-print (risk_free_rate)
+    risk_free_rate = st.number_input('Enter Risk-Free Rate value', value =0.02)
+    st.write('Risk-Free Rate = ', risk_free_rate*100, '%')
 
 
 
