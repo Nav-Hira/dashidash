@@ -57,10 +57,10 @@ for ticker in ticker_options:
 adj_close_df.index.name = 'Date'
 print (adj_close_df.head(5))
 
-'''
+
 import plotly.express as px
 df = px.data.stocks()
-fig = px.line(adj_close_df, x="ticker", y=adj_close_df.columns,
+fig = px.line(adj_close_df, x="Date", y=adj_close_df.columns,
               hover_data={"date": "|%B %d, %Y"},
               title='custom tick labels')
 fig.update_xaxes(
@@ -69,7 +69,7 @@ fig.update_xaxes(
 fig.show()
 
 st.plotly_chart(fig, use_container_width=True)
-'''
+
 
 
 if st.checkbox('Show raw data (since 2010)'):
