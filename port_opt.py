@@ -52,6 +52,8 @@ adj_close_df = pd.DataFrame()
 for ticker in ticker_options:
     data = yf.download(ticker, start = start_date,end = end_date)
     adj_close_df[ticker] = data['Adj Close']
+    adj_close_df.reset_index(inplace=True)
+    adj_close_df.rename(columns={'index': 'date'}, inplace=True)
 
 print (adj_close_df.head(5))
 
