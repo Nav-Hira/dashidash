@@ -63,8 +63,7 @@ log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna() #drop nans a
 cov_matrix = log_returns.cov()*252 #(52*5 days)
 print(cov_matrix)
 
-"""# Portfolio Standard deviation"""
-
+st.title('Portfolio Standard deviation')
 def standard_deviation(weights, cov_matrix):
     variance = weights.T @ cov_matrix @ weights
     return np.sqrt(variance)
