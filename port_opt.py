@@ -110,10 +110,8 @@ initial_weights = np.array([1/len(ticker_options)]*len(ticker_options))
 optimized_results = minimize(neg_sharpe_ratio, initial_weights, args=(log_returns, cov_matrix, risk_free_rate), method='SLSQP', constraints=constraints, bounds=bounds)
 
 optimal_weights = optimized_results.x
-
-optimal_weights = optimized_results.x
-
 print("Optimal Weights:")
+
 for ticker, weight in zip(ticker_options, optimal_weights):
     print(f"{ticker}: {weight:.4f}")
 
@@ -135,7 +133,7 @@ colors[1] = 'crimson'
 fig = go.Figure(data=[go.Bar(
     x=ticker_options,
     y=optimal_weights,
-    marker_color=colors # marker color can be a single color value or an iterable
+    #marker_color=colors # marker color can be a single color value or an iterable
 )])
 fig.update_layout(title_text='Optimal Portfolio Weights')
 
