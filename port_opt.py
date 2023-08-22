@@ -38,7 +38,7 @@ tickers = ['SPY', # S&P500 Index
 ticker_options = st.multiselect(
     'Select Ticker Symbols',
      tickers)
-st.write('You selected:', ticker_options)
+
 
 #Create list of close prices
 adj_close_df = pd.DataFrame()
@@ -54,6 +54,21 @@ for ticker in ticker_options:
     adj_close_df[ticker] = data['Adj Close']
 
 adj_close_df.head(5)
+
+
+import plotly.express as px
+df = px.data.stocks()
+fig = px.line(adj_close_df, x="Adj Close", y=ticker,
+              hover_data={"date": "|%B %d, %Y"},
+              title='custom tick labels')
+fig.update_xaxes(
+    dtick="M1",
+    tickformat="%b\n%Y")
+fig.show()
+
+st.plotly_chart(fig, use_container_width=True)
+
+
 
 if st.checkbox('Show raw data (since 2010)'):
     st.subheader('Raw data')
