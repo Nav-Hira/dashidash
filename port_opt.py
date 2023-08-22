@@ -132,3 +132,19 @@ plt.ylabel('Optimal Weights')
 plt.title('Optimal Portfolio Weights')
 
 plt.show()
+
+import plotly.graph_objects as go
+
+colors = ['lightslategray',] * 5
+colors[1] = 'crimson'
+
+fig = go.Figure(data=[go.Bar(
+    x=tickers,
+    y=optimal_weights,
+    marker_color=colors # marker color can be a single color value or an iterable
+)])
+fig.update_layout(title_text='Optimal Portfolio Weights')
+
+st.plotly_chart(fig, use_container_width=True)
+
+
