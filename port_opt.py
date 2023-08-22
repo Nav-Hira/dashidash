@@ -58,7 +58,7 @@ adj_close_df.head(5)
 
 import plotly.express as px
 df = px.data.stocks()
-fig = px.line(adj_close_df, x="Adj Close", y=ticker,
+fig = px.line(adj_close_df, x="Adj Close", y=adj_close_df.columns,
               hover_data={"date": "|%B %d, %Y"},
               title='custom tick labels')
 fig.update_xaxes(
