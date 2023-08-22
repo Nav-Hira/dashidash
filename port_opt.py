@@ -6,8 +6,8 @@
 
 st.title('Portfolio Optimisation')
 
-pip install yfinance
-pip install fredapi
+!pip install yfinance
+!pip install fredapi
 from fredapi import Fred
 
 import streamlit as st
