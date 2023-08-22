@@ -14,6 +14,8 @@ import streamlit as st
 import yfinance as yf
 import pandas as pd
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+
 import scipy
 import numpy as np
 from scipy.optimize import minimize
@@ -32,10 +34,10 @@ tickers = ['SPY', # S&P500 Index
 #tickers = ['VTI', 'BLK', 'UBS', 'FNF', 'STT']
 
 
-options = st.multiselect(
+ticker_options = st.multiselect(
     'Select Ticker Symbols',
      tickers)
-st.write('You selected:', options)
+st.write('You selected:', ticker_options)
 
 #Create list of close prices
 adj_close_df = pd.DataFrame()
@@ -46,7 +48,7 @@ start_date = '2008-01-01'
 end_date = '2023-12-31'
 
 adj_close_df = pd.DataFrame()
-for ticker in tickers:
+for ticker in ticker_options:
     data = yf.download(ticker, start = start_date,end = end_date)
     adj_close_df[ticker] = data['Adj Close']
 
@@ -92,8 +94,8 @@ print (risk_free_rate)
 
 #Set Initial weights
 
-#initial_weights = np.array([1/len(tickers)]*len(tickers))
-initial_weights = np.array([1/len(tickers)]*len(tickers))
+#initial_weights = np.array([1/len(ticker_options)]*len(ticker_options))
+initial_weights = np.array([1/len(ticker_options)]*len(ticker_options))
 
 
 
@@ -101,8 +103,8 @@ def neg_sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
     return -sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate)
 
 constraints = {'type': 'eq', 'fun': lambda weights: np.sum(weights) - 1}
-bounds = [(0, 0.4) for _ in range(len(tickers))]
-initial_weights = np.array([1/len(tickers)]*len(tickers))
+bounds = [(0, 0.4) for _ in range(len(ticker_options))]
+initial_weights = np.array([1/len(ticker_options)]*len(ticker_options))
 
 optimized_results = minimize(neg_sharpe_ratio, initial_weights, args=(log_returns, cov_matrix, risk_free_rate), method='SLSQP', constraints=constraints, bounds=bounds)
 
@@ -111,7 +113,7 @@ optimal_weights = optimized_results.x
 optimal_weights = optimized_results.x
 
 print("Optimal Weights:")
-for ticker, weight in zip(tickers, optimal_weights):
+for ticker, weight in zip(ticker_options, optimal_weights):
     print(f"{ticker}: {weight:.4f}")
 
 optimal_portfolio_return = expected_return(optimal_weights, log_returns)
@@ -124,22 +126,13 @@ print(f"Sharpe Ratio: {optimal_sharpe_ratio:.4f}")
 
 
 
-plt.figure(figsize=(10, 6))
-plt.bar(tickers, optimal_weights)
 
-plt.xlabel('Assets')
-plt.ylabel('Optimal Weights')
-plt.title('Optimal Portfolio Weights')
-
-plt.show()
-
-import plotly.graph_objects as go
 
 colors = ['lightslategray',] * 5
 colors[1] = 'crimson'
 
 fig = go.Figure(data=[go.Bar(
-    x=tickers,
+    x=ticker_options,
     y=optimal_weights,
     marker_color=colors # marker color can be a single color value or an iterable
 )])
