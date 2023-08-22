@@ -91,7 +91,7 @@ if st.checkbox('Apply 10 yr Treasury Rate for Risk-Free Rate '):
     ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
     risk_free_rate = ten_year_treasury_rate.iloc[-1]
 
-    st.write('Risk-Free Rate ' = risk_free_rate)
+    st.write('Risk-Free Rate = ', risk_free_rate)
 else: 
     risk_free_rate = st.number_input('Enter Risk-Free Rate value')
     st.write('Risk-Free Rate = ', risk_free_rate)
