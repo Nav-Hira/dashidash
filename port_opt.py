@@ -72,7 +72,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 if st.checkbox('Show raw data (since 2010)'):
     st.subheader('Raw data')
-    st.write(data)
+    st.write(adj_close_df)
 
 #lognormal returns
 log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna() #drop nans and calculate daily returns %)
