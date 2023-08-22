@@ -62,7 +62,7 @@ if st.checkbox('Show raw data (since 2010)'):
 
 import plotly.express as px
 df = px.data.stocks()
-fig = px.line(adj_close_df, x=adj_close_df.index, y=adj_close_df["SPY],
+fig = px.line(adj_close_df, x=adj_close_df.index, y=adj_close_df["SPY"],
               hover_data={"adj_close_df.index": "|%B %d, %Y"},
               title='custom tick labels')
 fig.update_xaxes(
