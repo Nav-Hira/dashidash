@@ -54,8 +54,7 @@ for ticker in ticker_options:
     adj_close_df[ticker] = data['Adj Close']
 
            
-adj_close_df.reset_index(inplace=True)
-adj_close_df.rename(columns={'index': 'date'}, inplace=True)
+adj_close_df.index.name = 'Date'
 print (adj_close_df.head(5))
 
 '''
