@@ -53,8 +53,6 @@ for ticker in ticker_options:
     data = yf.download(ticker, start = start_date,end = end_date)
     adj_close_df[ticker] = data['Adj Close']
 
-           
-adj_close_df.index.name = 'Date'
 print (adj_close_df.head(5))
 
 if st.checkbox('Show raw data (since 2010)'):
@@ -64,7 +62,7 @@ if st.checkbox('Show raw data (since 2010)'):
 
 import plotly.express as px
 df = px.data.stocks()
-fig = px.line(adj_close_df, x=adj_close_df.index, y=adj_close_df.columns,
+fig = px.line(adj_close_df, x=adj_close_df.index, y=adj_close_df["SPY],
               hover_data={"adj_close_df.index": "|%B %d, %Y"},
               title='custom tick labels')
 fig.update_xaxes(
