@@ -8,6 +8,7 @@ st.title('Portfolio Optimisation')
 
 pip install yfinance
 pip install fredapi
+from fredapi import Fred
 
 import streamlit as st
 import yfinance as yf
@@ -16,7 +17,7 @@ import matplotlib.pyplot as plt
 import scipy
 
 from scipy.optimize import minimize
-from fredapi import Fred
+
 
 
 #Define tickers
