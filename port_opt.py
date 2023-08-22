@@ -45,7 +45,7 @@ adj_close_df = pd.DataFrame()
 
 #Download close prices
 
-start_date = '2008-01-01'
+start_date = '2010-01-01'
 end_date = '2023-12-31'
 
 adj_close_df = pd.DataFrame()
@@ -55,14 +55,11 @@ for ticker in ticker_options:
 
 adj_close_df.head(5)
 
-if st.checkbox('Show raw data'):
+if st.checkbox('Show raw data (since 2010)'):
     st.subheader('Raw data')
     st.write(data)
 
 #lognormal returns
-
-import numpy as np
-
 log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna() #drop nans and calculate daily returns %)
 
 #calculate covariance
@@ -89,11 +86,18 @@ def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
 
 #risk_free_rate = .02 #default risk free rate
 
+if st.checkbox('Apply 10 yr Treasury Rate for Risk-Free Rate '):
+    fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
+    ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
+    risk_free_rate = ten_year_treasury_rate.iloc[-1]
 
-fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
-ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
+    st.write('Risk-Free Rate ' = risk_free_rate)
+else: 
+    risk_free_rate = st.number_input('Enter Risk-Free Rate value')
+    st.write('Risk-Free Rate = ', risk_free_rate)
 
-risk_free_rate = ten_year_treasury_rate.iloc[-1]
+
+
 print (risk_free_rate)
 
 
