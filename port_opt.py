@@ -67,6 +67,7 @@ fig = px.line(adj_close_df, x=adj_close_df.index, y=adj_close_df.columns,
               title='custom tick labels')
 fig.update_xaxes(
     dtick="M1",
+    tickmode='auto',
     tickformat="%b\n%Y")
 fig.show()
 
