@@ -52,6 +52,7 @@ for ticker in tickers2:
 adj_close_df.head(5)
 
 #lognormal returns
+
 import numpy as np
 
 log_returns = np.log(adj_close_df / adj_close_df.shift(1)).dropna() #drop nans and calculate daily returns %)
@@ -80,14 +81,6 @@ def sharpe_ratio(weights, log_returns, cov_matrix, risk_free_rate):
 
 
 risk_free_rate = .02 #default risk free rate
-
-"""
-#fred = Fred(api_key="6293ea460489ac4a0fd17baca6b39321")
-#ten_year_treasury_rate = fred.get_series_latest_release('GS10')/100
-
-#risk_free_rate = ten_year_treasury_rate.iloc[-1]
-#print (risk_free_rate)
-"""
 
 #Set Initial weights
 
