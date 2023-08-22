@@ -4,7 +4,7 @@
 
 #pip install -r requirements.txt
 
-st.title('Portfolio Optimisation')
+
 
 #pip install yfinance
 #pip install fredapi
@@ -18,6 +18,7 @@ import scipy
 import numpy as np
 from scipy.optimize import minimize
 
+st.title('Portfolio Optimisation')
 
 
 #Define tickers
