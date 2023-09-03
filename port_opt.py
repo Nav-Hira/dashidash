@@ -39,7 +39,7 @@ def search_symbols_and_names(query):
     symbol = info.get("symbol", "")
     name = info.get("longName", "")
 
-    return symbol, name
+    return symbol+"-"+name
 
 
 # Streamlit app
