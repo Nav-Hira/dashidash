@@ -45,24 +45,21 @@ def search_symbols_and_names(query):
 # Streamlit app
 st.title("Stock Symbol and Company Name Search")
 
-# Create an autocomplete input box for the search query
-search_query = st.text_input("Enter a symbol or company name:")
+# Create a search input box with autofill suggestions using st_searchbox
+search_query = st_searchbox(
+    search_symbols_and_names,
+    placeholder="Enter a symbol or company name...",
+    key="stock_searchbox"
+)
 
-# Perform the search when the user types into the input field
+# Display the results when a selection is made from the searchbox
 if search_query:
-    suggestions = []
-
-    # Search for symbols and company names
     symbol, name = search_symbols_and_names(search_query)
 
     if symbol:
-        suggestions.append(f"Symbol: {symbol}")
+        st.success(f"Symbol: {symbol}")
     if name:
-        suggestions.append(f"Company Name: {name}")
-
-    # Display autocomplete suggestions using multiselect
-    selected_suggestions = st.multiselect("Suggestions:", suggestions, [])
-    
+        st.success(f"Company Name: {name}")
 
 #Define tickers
 
