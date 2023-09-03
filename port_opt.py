@@ -41,6 +41,15 @@ def search_symbols_and_names(query):
 
     return symbol, name
 
+
+
+
+# pass search function to searchbox
+selected_value = st_searchbox(
+    symbol,
+    key=name,
+
+
 # Streamlit app
 st.title("Stock Symbol and Company Name Search")
 
@@ -56,8 +65,6 @@ if st.button("Search"):
         st.success(f"Company Name: {name}")
     else:
         st.error("Symbol not found. Please enter a valid symbol or company name.")
-
-
 
 
 #Define tickers
