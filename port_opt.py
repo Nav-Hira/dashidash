@@ -47,7 +47,7 @@ def search_symbols_and_names(query):
 # pass search function to searchbox
 selected_value = st_searchbox(
     symbol,
-    key=name,
+    key="name",
 )
 
 
