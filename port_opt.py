@@ -61,7 +61,7 @@ if search_query:
 
 #Define tickers
 
-tickers = ['SPY', # S&P500 Index
+tickers = [symbol,'SPY', # S&P500 Index
            'BND', # Bond Index - Vanguard Total Bond Market Index Fund ETF
            'GLD', # SPDR Gold Trust - Largest commodity
            'QQQ', # Invesco largest stock on NASDAQ
