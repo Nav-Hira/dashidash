@@ -9,6 +9,7 @@
 #pip install yfinance
 #pip install fredapi
 from fredapi import Fred
+from streamlit_searchbox import st_searchbox
 
 import streamlit as st
 import yfinance as yf
@@ -16,12 +17,48 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
+
+
 import scipy
 import numpy as np
 from scipy.optimize import minimize
 
 st.title('Portfolio Optimisation')
 st.write('By Nav S. Hira, Aug 2023')
+
+import streamlit as st
+import yfinance as yf
+
+# Define a function to search for symbols and company names
+def search_symbols_and_names(query):
+    # Create a Ticker object to search for symbols
+    ticker = yf.Ticker(query)
+    info = ticker.info
+
+    # Return the symbol and name if available
+    symbol = info.get("symbol", "")
+    name = info.get("longName", "")
+
+    return symbol, name
+
+# Streamlit app
+st.title("Stock Symbol and Company Name Search")
+
+# Create a search input box with autofill suggestions
+search_query = st.text_input("Enter a symbol or company name:", value="", key="search_input")
+
+# Perform the search when the user submits the query
+if st.button("Search"):
+    symbol, name = search_symbols_and_names(search_query)
+
+    if symbol:
+        st.success(f"Symbol: {symbol}")
+        st.success(f"Company Name: {name}")
+    else:
+        st.error("Symbol not found. Please enter a valid symbol or company name.")
+
+
+
 
 #Define tickers
 
