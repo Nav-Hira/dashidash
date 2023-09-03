@@ -57,7 +57,7 @@ if search_query:
     symbol, name = search_symbols_and_names(search_query)
 
     if symbol:
-        st.success(f"Symbol: {symbol}", f"Company Name: {name}")
+        st.success(f"Symbol: {symbol} {name}")
 
 #Define tickers
 
