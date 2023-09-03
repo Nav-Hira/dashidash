@@ -48,6 +48,7 @@ def search_symbols_and_names(query):
 selected_value = st_searchbox(
     symbol,
     key=name,
+)
 
 
 # Streamlit app
